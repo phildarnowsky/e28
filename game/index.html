@@ -4,8 +4,19 @@
     <script src="index.js" defer="defer"></script>
   </head>
   <body>
-    <p>If you can read this HTML is working.</p>
+    <p>Let's play a guessing game.</p>
 
-    <p id="js-target"></p>
+    <p>
+      I will think of a number between 1 and 100. You will have 7 chances to
+      guess it. I will tell you each time if your guess is too high or too low.
+    </p>
+
+    <p id="guess-feedback"></p>
+
+    <p id="guesses-remaining"></p>
+
+    <input type="text" id="player-guess" />
+    <button id="make-guess">Guess!</button>
+    <button id="reset">Reset game</button>
   </body>
 </html>
