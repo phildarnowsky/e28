@@ -13,6 +13,22 @@
   </head>
 
   <body>
-    <div id="app" v-cloak>{{sampleText}}</div>
+    <div id="app" v-cloak>
+      <p>Let's play a guessing game.</p>
+
+      <p>
+        I will think of a number between 1 and 100. You will have 7 chances to
+        guess it. I will tell you each time if your guess is too high or too low.
+      </p>
+
+      <div v-if='nGuessesRemaining'>
+        Guesses remaining: {{nGuessesRemaining}}
+
+        <ul v-show='pastGuesses'>
+          <li v-for='pastGuess in pastGuesses'>{{pastGuess}}</li>
+        </ul>
+      </div>
+      <p v-else>Sorry, you're out of guesses. The target number was {{target}}.</p>
+    </div>
   </body>
 </html>
