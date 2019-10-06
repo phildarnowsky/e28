@@ -18,17 +18,31 @@
 
       <p>
         I will think of a number between 1 and 100. You will have 7 chances to
-        guess it. I will tell you each time if your guess is too high or too low.
+        guess it. I'll help you keep track of your closest low and high guesses.
       </p>
 
-      <div v-if='nGuessesRemaining'>
-        Guesses remaining: {{nGuessesRemaining}}
-
-        <ul v-show='pastGuesses'>
-          <li v-for='pastGuess in pastGuesses'>{{pastGuess}}</li>
-        </ul>
+      <div v-if='won'>
+        Congratulations! The number was indeed {{target}}.
       </div>
-      <p v-else>Sorry, you're out of guesses. The target number was {{target}}.</p>
+      <div v-else-if='nGuessesRemaining'>
+        <p>Guesses remaining: {{nGuessesRemaining}}</p>
+
+        <p v-if='closestLowGuess'>Closest low guess: {{closestLowGuess}}</p>
+
+        <p v-if='closestHighGuess'>Closest high guess: {{closestHighGuess}}</p>
+
+        <form @submit.prevent="makeGuess">
+          <input type="text" v-model.number="guess" placeholder="Enter a guess..." />
+          <button type="submit">Guess!</button>
+        </form>
+      </div>
+      <p v-else>
+        Sorry, you're out of guesses. The target number was {{target}}.
+      </p>
+
+      <div>
+        <button @click='resetGame'>New game</button>
+      </div>
     </div>
   </body>
 </html>
