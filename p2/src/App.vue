@@ -19,10 +19,8 @@
     <div v-else>
       <LoseMessage :target="target" />
     </div>
-<!--
-    <div>
-      <button @click='resetGame'>New game</button>
-    </div> -->
+
+    <ResetButton :resetCallback='resetGame' />
   </div>
 </template>
 
@@ -32,6 +30,7 @@
   import GuessForm from "./components/GuessForm.vue";
   import GuessesRemaining from "./components/GuessesRemaining.vue";
   import LoseMessage from "./components/LoseMessage.vue";
+  import ResetButton from "./components/ResetButton.vue";
   import WinMessage from "./components/WinMessage.vue";
 
   const chooseTarget = function() {
@@ -48,6 +47,7 @@
       GuessForm,
       GuessesRemaining,
       LoseMessage,
+      ResetButton,
       WinMessage
     },
     data: function() {
@@ -69,6 +69,11 @@
         } else {
           this.pastGuesses.push(guess);
         }
+      },
+      resetGame: function() {
+        this.target = chooseTarget();
+        this.pastGuesses = [];
+        this.won = false;
       }
     }
   }
