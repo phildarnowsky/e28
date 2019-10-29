@@ -7,16 +7,19 @@
       guess it. I'll help you keep track of your closest low and high guesses.
     </p>
 
-    <div>
+    <div v-if="won">
       <WinMessage :target="target"/>
     </div>
-<!--    <div v-else-if='nGuessesRemaining'>
-      <p>Guesses remaining: {{nGuessesRemaining}}</p>
+    <div v-else-if='nGuessesRemaining'>
+      <GuessesRemaining :nGuessesRemaining='nGuessesRemaining' />
+      <ClosestLowGuess :pastGuesses='pastGuesses' :target='target' />
+      <ClosestHighGuess :pastGuesses='pastGuesses' :target='target' />
+    </div>
+<!--
 
       <p v-if='closestLowGuess'>Closest low guess: {{closestLowGuess}}</p>
 
       <p v-if='closestHighGuess'>Closest high guess: {{closestHighGuess}}</p>
-
       <form @submit.prevent="makeGuess">
         <input type="text" v-model.number="guess" placeholder="Enter a guess..." />
         <button type="submit">Guess!</button>
@@ -33,6 +36,9 @@
 </template>
 
 <script>
+  import ClosestLowGuess from "./components/ClosestLowGuess.vue";
+  import ClosestHighGuess from "./components/ClosestHighGuess.vue";
+  import GuessesRemaining from "./components/GuessesRemaining.vue";
   import WinMessage from "./components/WinMessage.vue";
 
   const chooseTarget = function() {
@@ -42,11 +48,17 @@
   export default {
     name: 'app',
     components: {
+      ClosestLowGuess,
+      ClosestHighGuess,
+      GuessesRemaining,
       WinMessage
     },
     data: function() {
       return {
-        target: chooseTarget()
+        pastGuesses: [],
+        nGuessesRemaining: 7,
+        target: chooseTarget(),
+        won: false
       }
     }
   }

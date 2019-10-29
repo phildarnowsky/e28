@@ -5,10 +5,10 @@
 </template>
 
 <script>
-export default {
-  name: 'win-message',
-  props: {
-    target: Number
+  export default {
+    name: 'win-message',
+    props: {
+      target: Number
+    }
   }
-}
 </script>
