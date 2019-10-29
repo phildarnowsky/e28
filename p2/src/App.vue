@@ -33,10 +33,6 @@
   import ResetButton from "./components/ResetButton.vue";
   import WinMessage from "./components/WinMessage.vue";
 
-  const chooseTarget = function() {
-    return Math.floor(Math.random() * 100) + 1;
-  }
-
   const maxNGuesses = 7;
 
   export default {
@@ -53,7 +49,7 @@
     data: function() {
       return {
         pastGuesses: [],
-        target: chooseTarget(),
+        target: this.chooseTarget(),
         won: false
       }
     },
@@ -63,6 +59,9 @@
       }
     },
     methods: {
+      chooseTarget: function() {
+        return Math.floor(Math.random() * 100) + 1;
+      },
       makeGuess: function(guess) {
         if(guess == this.target) {
           this.won = true;
@@ -71,21 +70,10 @@
         }
       },
       resetGame: function() {
-        this.target = chooseTarget();
+        this.target = this.chooseTarget();
         this.pastGuesses = [];
         this.won = false;
       }
     }
   }
 </script>
-
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
