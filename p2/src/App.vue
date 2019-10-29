@@ -8,7 +8,7 @@
     </p>
 
     <div v-if="won">
-      <WinMessage :target="target"/>
+      <WinMessage :target="target" />
     </div>
     <div v-else-if='nGuessesRemaining'>
       <GuessesRemaining :nGuessesRemaining='nGuessesRemaining' />
@@ -16,17 +16,10 @@
       <ClosestHighGuess :pastGuesses='pastGuesses' :target='target' />
       <GuessForm :pastGuesses='pastGuesses' :guessCallback='makeGuess'/>
     </div>
-<!--
-
-      <form @submit.prevent="makeGuess">
-        <input type="text" v-model.number="guess" placeholder="Enter a guess..." />
-        <button type="submit">Guess!</button>
-      </form>
+    <div v-else>
+      <LoseMessage :target="target" />
     </div>
-    <p v-else>
-      Sorry, you're out of guesses. The target number was {{target}}.
-    </p>
-
+<!--
     <div>
       <button @click='resetGame'>New game</button>
     </div> -->
@@ -38,6 +31,7 @@
   import ClosestHighGuess from "./components/ClosestHighGuess.vue";
   import GuessForm from "./components/GuessForm.vue";
   import GuessesRemaining from "./components/GuessesRemaining.vue";
+  import LoseMessage from "./components/LoseMessage.vue";
   import WinMessage from "./components/WinMessage.vue";
 
   const chooseTarget = function() {
@@ -53,6 +47,7 @@
       ClosestHighGuess,
       GuessForm,
       GuessesRemaining,
+      LoseMessage,
       WinMessage
     },
     data: function() {
