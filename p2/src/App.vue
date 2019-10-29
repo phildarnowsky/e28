@@ -14,12 +14,10 @@
       <GuessesRemaining :nGuessesRemaining='nGuessesRemaining' />
       <ClosestLowGuess :pastGuesses='pastGuesses' :target='target' />
       <ClosestHighGuess :pastGuesses='pastGuesses' :target='target' />
+      <GuessForm :pastGuesses='pastGuesses' :guessCallback='makeGuess'/>
     </div>
 <!--
 
-      <p v-if='closestLowGuess'>Closest low guess: {{closestLowGuess}}</p>
-
-      <p v-if='closestHighGuess'>Closest high guess: {{closestHighGuess}}</p>
       <form @submit.prevent="makeGuess">
         <input type="text" v-model.number="guess" placeholder="Enter a guess..." />
         <button type="submit">Guess!</button>
@@ -38,6 +36,7 @@
 <script>
   import ClosestLowGuess from "./components/ClosestLowGuess.vue";
   import ClosestHighGuess from "./components/ClosestHighGuess.vue";
+  import GuessForm from "./components/GuessForm.vue";
   import GuessesRemaining from "./components/GuessesRemaining.vue";
   import WinMessage from "./components/WinMessage.vue";
 
@@ -45,20 +44,36 @@
     return Math.floor(Math.random() * 100) + 1;
   }
 
+  const maxNGuesses = 7;
+
   export default {
     name: 'app',
     components: {
       ClosestLowGuess,
       ClosestHighGuess,
+      GuessForm,
       GuessesRemaining,
       WinMessage
     },
     data: function() {
       return {
         pastGuesses: [],
-        nGuessesRemaining: 7,
         target: chooseTarget(),
         won: false
+      }
+    },
+    computed: {
+      nGuessesRemaining: function() {
+        return maxNGuesses - this.pastGuesses.length;
+      }
+    },
+    methods: {
+      makeGuess: function(guess) {
+        if(guess == this.target) {
+          this.won = true;
+        } else {
+          this.pastGuesses.push(guess);
+        }
       }
     }
   }
