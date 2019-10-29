@@ -1,24 +1,9 @@
-# p2
+# Project 2
++ By: Phil Darnowsky
++ Production URL: <http://p2.darnowskye28.me>
 
-## Project setup
-```
-npm install
-```
+## Outside resources
+VueJS API documentation <https://vuejs.org/v2/api/>
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## Notes for instructor
+Again, still sticking with primary sources.
