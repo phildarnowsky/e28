@@ -7,9 +7,9 @@ import ShowCategories from './components/ShowCategories.vue';
 
 Vue.use(VueRouter);
 const routes = [
-	{ path: '/', component: ShowHome },
-	{ path: '/products', component: ShowProducts },
-	{ path: '/categories', component: ShowCategories }
+	{ path: '/', name: 'home', component: ShowHome },
+	{ path: '/products', name: 'products', component: ShowProducts },
+	{ path: '/categories', name: 'categories', component: ShowCategories }
 ];
 const router = new VueRouter({
   mode: 'history',
