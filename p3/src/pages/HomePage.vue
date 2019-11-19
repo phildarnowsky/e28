@@ -5,9 +5,15 @@
 
       <ul>
         <li v-for="deck in decks" :key="deck.id">
-          {{ deck.name }}
+          <router-link :to="{name: 'deck', params: {deckId: deck.id}}">
+            {{ deck.name }}
+          </router-link>
         </li>
       </ul>
+    </div>
+
+    <div v-else>
+      Loading...
     </div>
   </div>
 </template>
