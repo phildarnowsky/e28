@@ -27,8 +27,26 @@ export default {
 
   methods: {
     chooseCurrentCard: function() {
+      this.expireCurrentCard()
       const chosenIndex = Math.floor(Math.random() * this.deck.cards.length);
       this.currentCard = this.deck.cards[chosenIndex];
+    },
+
+    expireCurrentCard: function() {
+      if(this.currentCard) {
+        let record = window.localStorage.getItem(this.deck.id);
+        if(record) {
+          record = JSON.parse(record)
+        } else {
+          record = []
+        }
+        record.push(this.currentCard.question)
+
+        window.localStorage.setItem(
+          this.deck.id,
+          JSON.stringify(record)
+        );
+      }
     }
   }
 }
@@ -39,7 +57,7 @@ export default {
     <div v-if="deck">
       <h1>{{deck.name}}</h1>
 
-      <Gameboard :currentCard='currentCard' />
+      <Gameboard :currentCard='currentCard' :checkGuessCallback='chooseCurrentCard' />
     </div>
 
     <div v-else>

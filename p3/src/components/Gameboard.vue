@@ -31,12 +31,15 @@ export default {
       if(this.guessIsCorrect(guess)) {
         this.rightGuessCopy = `Correct! "${this.currentCard.question}" is "${this.currentCard.canonical_answer}"`
         this.wrongGuessCopy = null
-        this.checkGuessCallback && this.checkGuessCallback();
+        setTimeout(() => {
+          this.rightGuessCopy = null
+          this.checkGuessCallback()
+        }, 2000)
       } else {
         this.rightGuessCopy = null
         this.wrongGuessCopy = `Sorry, "${guess}" isn't right.`
-        this.guess = '';
       }
+      this.guess = '';
     },
 
     guessIsCorrect: function(guess) {
