@@ -67,6 +67,10 @@ export default {
         {{wrongGuessCopy}}
       </div>
     </div>
+
+    <div v-else>
+      Congratulations! You've completed all the cards in this deck.
+    </div>
   </div>
 </template>
 
