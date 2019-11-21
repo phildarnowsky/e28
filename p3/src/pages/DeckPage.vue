@@ -92,6 +92,10 @@ export default {
       :resetIfCompleteCallback='chooseCurrentCard'
       :rightGuessCallback='chooseCurrentCard'
     />
+
+    <router-link :to="{name: 'home'}">
+      Return to main page
+    </router-link>
   </div>
 </template>
 
