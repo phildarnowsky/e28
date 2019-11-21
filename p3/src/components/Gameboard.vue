@@ -52,18 +52,18 @@ export default {
 
 <template>
   <div>
-    <div v-if={currentCard}>
+    <div v-if='currentCard'>
       <h2>{{currentCard.question}}</h2>
-      <form @submit.prevent='checkGuess(guess)'>
+      <form v-if='!rightGuessCopy' @submit.prevent='checkGuess(guess)'>
         <input type="text" v-model="guess" placeholder="Enter a guess..." />
         <button type="submit">Guess!</button>
       </form>
 
-      <div v-if={rightGuessCopy}>
+      <div v-if='rightGuessCopy'>
         {{rightGuessCopy}}
       </div>
 
-      <div v-if={wrongGuessCopy}>
+      <div v-if='wrongGuessCopy'>
         {{wrongGuessCopy}}
       </div>
     </div>
