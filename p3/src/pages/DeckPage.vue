@@ -86,7 +86,12 @@ export default {
     <div v-if="deck">
       <h1>{{deck.name}}</h1>
 
-      <Gameboard :currentCard='currentCard' :checkGuessCallback='chooseCurrentCard' />
+      <Gameboard
+        :currentCard='currentCard'
+        :deckId='deck.id'
+        :resetIfCompleteCallback='chooseCurrentCard'
+        :rightGuessCallback='chooseCurrentCard'
+      />
     </div>
 
     <div v-else>

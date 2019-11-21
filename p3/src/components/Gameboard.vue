@@ -1,6 +1,10 @@
 <script>
+import ResetProgressButton from './ResetProgressButton.vue'
+
 export default {
   name: 'Gameboard',
+
+  components: {ResetProgressButton},
 
   data: function() {
     return ({
@@ -11,8 +15,10 @@ export default {
   },
 
   props: {
-    checkGuessCallback: Function,
-    currentCard: Object
+    currentCard: Object,
+    deckId: Number,
+    resetIfCompleteCallback: Function,
+    rightGuessCallback: Function
   },
 
   computed: {
@@ -33,7 +39,7 @@ export default {
         this.wrongGuessCopy = null
         setTimeout(() => {
           this.rightGuessCopy = null
-          this.checkGuessCallback()
+          this.rightGuessCallback()
         }, 2000)
       } else {
         this.rightGuessCopy = null
@@ -46,6 +52,12 @@ export default {
       const normalizedGuess = guess.trim().toLowerCase()
       return this.validAnswers.has(normalizedGuess)
     },
+
+    resetIfComplete: function() {
+      if(!this.currentCard) {
+        this.resetIfCompleteCallback()
+      }
+    }
   }
 }
 </script>
@@ -71,6 +83,8 @@ export default {
     <div v-else>
       Congratulations! You've completed all the cards in this deck.
     </div>
+
+    <ResetProgressButton :deckId='deckId' :resetCallback='resetIfComplete' />
   </div>
 </template>
 
