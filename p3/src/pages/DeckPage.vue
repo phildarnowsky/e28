@@ -1,28 +1,29 @@
 <script>
 import Gameboard from '../components/Gameboard.vue'
 
-const axios = require('axios')
-
 export default {
   name: 'DeckPage',
 
   components: {Gameboard},
 
+  props: {
+    decks: Array
+  },
+
   data: function() {
     return({
-      currentCard: null,
-      deck: null
+      currentCard: null
     })
   },
 
+  computed: {
+    deck: function() {
+      return this.decks[this.$route.params.deckId];
+    }
+  },
+
   mounted: function() {
-    const fetchUrl = 'https://my-json-server.typicode.com/phildarnowsky/e28_p3_api/decks/' + this.$route.params.deckId
-    axios.
-      get(fetchUrl).
-      then(response => {
-        this.deck = response.data
-        this.chooseCurrentCard()
-      })
+    this.chooseCurrentCard()
   },
 
   methods: {
@@ -83,20 +84,14 @@ export default {
 
 <template>
   <div>
-    <div v-if="deck">
-      <h1>{{deck.name}}</h1>
+    <h1>{{deck.name}}</h1>
 
-      <Gameboard
-        :currentCard='currentCard'
-        :deckId='deck.id'
-        :resetIfCompleteCallback='chooseCurrentCard'
-        :rightGuessCallback='chooseCurrentCard'
-      />
-    </div>
-
-    <div v-else>
-      Loading...
-    </div>
+    <Gameboard
+      :currentCard='currentCard'
+      :deckId='deck.id'
+      :resetIfCompleteCallback='chooseCurrentCard'
+      :rightGuessCallback='chooseCurrentCard'
+    />
   </div>
 </template>
 
