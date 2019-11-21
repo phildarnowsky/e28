@@ -7,7 +7,7 @@ export default {
   components: {Gameboard},
 
   props: {
-    decks: Array
+    decks: Object
   },
 
   data: function() {

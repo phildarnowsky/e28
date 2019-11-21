@@ -17,7 +17,7 @@ export default {
   name: 'HomePage',
 
   props: {
-    decks: Array
+    decks: Object
   }
 }
 </script>

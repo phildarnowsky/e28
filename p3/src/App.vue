@@ -20,11 +20,22 @@ export default {
     })
   },
 
+  methods: {
+    buildDecks: function(data) {
+      let result = {}
+      data.forEach((deckData) => {
+        result[deckData.id] = deckData
+      })
+
+      this.decks = result
+    }
+  },
+
   mounted: function() {
     axios.
       get('https://my-json-server.typicode.com/phildarnowsky/e28_p3_api/decks').
       then(response => {
-        this.decks = response.data
+        this.buildDecks(response.data)
       })
   }
 }
