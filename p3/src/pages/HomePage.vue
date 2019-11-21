@@ -9,6 +9,10 @@
         </router-link>
       </li>
     </ul>
+
+    <router-link :to="{name: 'stats'}">
+      View stats
+    </router-link>
   </div>
 </template>
 
