@@ -6,10 +6,6 @@ export default {
 
   components: {Gameboard},
 
-  props: {
-    decks: Object
-  },
-
   data: function() {
     return({
       currentCard: null
@@ -18,7 +14,8 @@ export default {
 
   computed: {
     deck: function() {
-      return this.decks[this.$route.params.deckId];
+      const id = this.$route.params.deckId
+      return this.$store.getters.getDeckById(id)
     }
   },
 

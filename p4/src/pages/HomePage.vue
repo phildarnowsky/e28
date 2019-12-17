@@ -3,7 +3,7 @@
     <h1>Available Decks</h1>
 
     <ul>
-      <li v-for="deck in decks" :key="deck.id">
+      <li v-for="deck in this.$store.getters.allDecks" :key="deck.id">
         <router-link :to="{name: 'deck', params: {deckId: deck.id}}">
           {{ deck.name }}
         </router-link>
@@ -19,10 +19,6 @@
 <script>
 export default {
   name: 'HomePage',
-
-  props: {
-    decks: Object
-  }
 }
 </script>
 

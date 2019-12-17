@@ -2,10 +2,6 @@
 export default {
   name: 'StatsPage',
 
-  props: {
-    decks: Object
-  },
-
   methods: {
     nCompleted: function(deck) {
       const json = window.localStorage.getItem(deck.id)
@@ -28,7 +24,7 @@ export default {
   <div>
     <h1>Stats</h1>
 
-    <p v-for="deck in decks" :key="deck.id">
+    <p v-for="deck in this.$store.getters.allDecks" :key="deck.id">
       {{deck.name}}: {{nCompleted(deck)}}/{{nTotal(deck)}}
     </p>
 

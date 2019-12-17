@@ -21,7 +21,27 @@ const router = new VueRouter({
   mode: 'history'
 })
 
-const store = new Vuex.Store()
+const store = new Vuex.Store({
+  state: {
+    decks: []
+  },
+  getters: {
+    allDecks(state) {
+      return state.decks;
+    },
+
+    getDeckById(state) {
+      return function(id) {
+        return state.decks[id];
+      }
+    }
+  },
+  mutations: {
+    setupDecks(state, payload) {
+      state.decks = payload;
+    }
+  }
+})
 
 new Vue({
   render: h => h(App),

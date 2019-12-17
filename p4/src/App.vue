@@ -14,10 +14,10 @@ const axios = require('axios')
 export default {
   name: 'app',
 
-  data: function() {
-    return({
-      decks: null
-    })
+  computed: {
+    decks: function() {
+      return this.$store.getters.allDecks;
+    }
   },
 
   methods: {
@@ -27,7 +27,7 @@ export default {
         result[deckData.id] = deckData
       })
 
-      this.decks = result
+      this.$store.commit('setupDecks', result)
     }
   },
 
