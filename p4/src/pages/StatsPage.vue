@@ -4,13 +4,10 @@ export default {
 
   methods: {
     nCompleted: function(deck) {
-      const json = window.localStorage.getItem(deck.id)
-
-      if(json) {
-        return JSON.parse(json).length
-      } else {
-        return 0
-      }
+      let completions = window.localStorage.getItem('completions')
+      completions = completions ? JSON.parse(completions) : {}
+      const completedCards = completions[deck.id] || []
+      return completedCards.length
     },
 
     nTotal: function(deck) {

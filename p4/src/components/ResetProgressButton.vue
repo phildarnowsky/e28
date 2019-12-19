@@ -9,7 +9,11 @@ export default {
 
   methods: {
     resetProgress: function() {
-      window.localStorage.removeItem(this.deckId)
+      let completions = window.localStorage.getItem('completions')
+      completions = completions ? JSON.parse(completions) : {}
+      completions[this.deckId] = []
+
+      window.localStorage.setItem('completions', JSON.stringify(completions))
       this.resetCallback && this.resetCallback()
     }
   }

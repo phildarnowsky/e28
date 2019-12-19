@@ -60,19 +60,27 @@ export default {
         let completedCards = this.getCompletedCards()
         completedCards.push(this.currentCard.question)
 
+        let completions = this.getCompletions()
+        completions[this.deck.id] = completedCards
+
         window.localStorage.setItem(
-          this.deck.id,
-          JSON.stringify(completedCards)
+          'completions',
+          JSON.stringify(completions)
         )
       }
     },
 
     getCompletedCards: function() {
-      const record = window.localStorage.getItem(this.deck.id)
-      if(record) {
-        return(JSON.parse(record))
+      const record = this.getCompletions()[this.deck.id]
+      return record || []
+    },
+
+    getCompletions: function() {
+      const completions = window.localStorage.getItem('completions')
+      if(completions) {
+        return(JSON.parse(completions))
       } else {
-        return([])
+        return({})
       }
     }
   }
