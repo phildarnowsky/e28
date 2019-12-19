@@ -18,17 +18,6 @@ export default {
     }
   },
 
-  methods: {
-    buildDecks: function(data) {
-      let result = {}
-      data.forEach((deckData) => {
-        result[deckData.id] = deckData
-      })
-
-      this.$store.commit('setupDecks', result)
-    }
-  },
-
   mounted: function() {
     this.$store.dispatch('loadDecks');
   }

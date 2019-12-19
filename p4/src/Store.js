@@ -7,8 +7,9 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
   state: {
-    decks: []
+    decks: null
   },
+
   getters: {
     allDecks(state) {
       return state.decks;
@@ -20,17 +21,23 @@ const store = new Vuex.Store({
       }
     }
   },
+
   mutations: {
     setupDecks(state, payload) {
       state.decks = payload;
     }
   },
+
   actions: {
     loadDecks({commit}) {
       axios.
         get('https://my-json-server.typicode.com/phildarnowsky/e28_p3_api/decks').
         then(response => {
-          commit('setupDecks', response.data)
+          let result = {}
+          response.data.forEach((deckData) => {
+            result[deckData.id] = deckData
+          })
+          commit('setupDecks', result)
         })
     }
   }
