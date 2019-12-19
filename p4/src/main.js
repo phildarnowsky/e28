@@ -10,6 +10,8 @@ Vue.config.productionTip = false
 Vue.use(VueRouter)
 Vue.use(Vuex)
 
+const axios = require('axios')
+
 const routes = [
   { path: '/', name: "home", component: HomePage },
   { path: '/decks/:deckId', name: "deck", component: DeckPage },
@@ -39,6 +41,15 @@ const store = new Vuex.Store({
   mutations: {
     setupDecks(state, payload) {
       state.decks = payload;
+    }
+  },
+  actions: {
+    loadDecks({commit}) {
+      axios.
+        get('https://my-json-server.typicode.com/phildarnowsky/e28_p3_api/decks').
+        then(response => {
+          commit('setupDecks', response.data)
+        })
     }
   }
 })

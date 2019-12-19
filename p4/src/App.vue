@@ -9,8 +9,6 @@
 </template>
 
 <script>
-const axios = require('axios')
-
 export default {
   name: 'app',
 
@@ -32,11 +30,7 @@ export default {
   },
 
   mounted: function() {
-    axios.
-      get('https://my-json-server.typicode.com/phildarnowsky/e28_p3_api/decks').
-      then(response => {
-        this.buildDecks(response.data)
-      })
+    this.$store.dispatch('loadDecks');
   }
 }
 </script>
