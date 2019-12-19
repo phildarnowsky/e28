@@ -1,4 +1,4 @@
-const deckData = [
+const defaultDeckData = [
   {
     "id": 1,
     "name": "German vocabulary",
@@ -64,7 +64,9 @@ const deckData = [
   }
 ]
 
-const mockDeckApi = () => {
+const mockDeckApi = (deckData) => {
+  deckData = deckData || defaultDeckData
+
   cy.server()
   cy.route({
     method: 'GET',
