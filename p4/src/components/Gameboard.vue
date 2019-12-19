@@ -1,4 +1,5 @@
 <script>
+import { required } from 'vuelidate/lib/validators'
 import ResetProgressButton from './ResetProgressButton.vue'
 
 export default {
@@ -12,6 +13,10 @@ export default {
       rightGuessCopy: null,
       wrongGuessCopy: null
     })
+  },
+
+  validations: {
+    guess: { required }
   },
 
   props: {
@@ -34,6 +39,11 @@ export default {
 
   methods: {
     checkGuess: function(guess) {
+      if(this.$v.guess.$invalid) {
+        alert("Please enter a guess")
+        return
+      }
+
       if(this.guessIsCorrect(guess)) {
         this.rightGuessCopy = `Correct! "${this.currentCard.question}" is "${this.currentCard.canonical_answer}"`
         this.wrongGuessCopy = null
@@ -67,7 +77,7 @@ export default {
     <div v-if='currentCard'>
       <h2>{{currentCard.question}}</h2>
       <form v-if='!rightGuessCopy' @submit.prevent='checkGuess(guess)'>
-        <input type="text" v-model="guess" placeholder="Enter a guess..." />
+        <input type="text" v-model="$v.guess.$model" placeholder="Enter a guess..." />
         <button type="submit">Guess!</button>
       </form>
 

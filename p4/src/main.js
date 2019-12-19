@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import Vuelidate from 'vuelidate'
 import store from './Store.js'
 import App from './App.vue'
 import DeckPage from './pages/DeckPage.vue'
@@ -8,6 +9,7 @@ import StatsPage from './pages/StatsPage.vue'
 
 Vue.config.productionTip = false
 Vue.use(VueRouter)
+Vue.use(Vuelidate)
 
 const routes = [
   { path: '/', name: "home", component: HomePage },
