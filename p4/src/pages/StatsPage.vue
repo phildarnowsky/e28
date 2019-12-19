@@ -4,10 +4,7 @@ export default {
 
   methods: {
     nCompleted: function(deck) {
-      let completions = window.localStorage.getItem('completions')
-      completions = completions ? JSON.parse(completions) : {}
-      const completedCards = completions[deck.id] || []
-      return completedCards.length
+      return this.$store.getters.getCompletedCardsByDeckId(deck.id).length
     },
 
     nTotal: function(deck) {

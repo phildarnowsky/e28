@@ -9,11 +9,7 @@ export default {
 
   methods: {
     resetProgress: function() {
-      let completions = window.localStorage.getItem('completions')
-      completions = completions ? JSON.parse(completions) : {}
-      completions[this.deckId] = []
-
-      window.localStorage.setItem('completions', JSON.stringify(completions))
+      this.$store.dispatch('resetProgress', {deckId: this.deckId})
       this.resetCallback && this.resetCallback()
     }
   }

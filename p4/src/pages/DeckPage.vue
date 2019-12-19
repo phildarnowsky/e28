@@ -57,32 +57,16 @@ export default {
 
     expireCurrentCard: function() {
       if(this.currentCard) {
-        let completedCards = this.getCompletedCards()
-        completedCards.push(this.currentCard.question)
-
-        let completions = this.getCompletions()
-        completions[this.deck.id] = completedCards
-
-        window.localStorage.setItem(
-          'completions',
-          JSON.stringify(completions)
-        )
+        this.$store.dispatch(
+          'expireCard',
+          {card: this.currentCard, deck: this.deck}
+        );
       }
     },
 
     getCompletedCards: function() {
-      const record = this.getCompletions()[this.deck.id]
-      return record || []
+      return this.$store.getters.getCompletedCardsByDeckId(this.deck.id)
     },
-
-    getCompletions: function() {
-      const completions = window.localStorage.getItem('completions')
-      if(completions) {
-        return(JSON.parse(completions))
-      } else {
-        return({})
-      }
-    }
   }
 }
 </script>
