@@ -65,7 +65,7 @@ const deckData =
   }
 ]
 
-describe('My First Test', () => {
+describe('Home page', () => {
   beforeEach(function () {
     cy.server()
     cy.route({
